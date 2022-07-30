@@ -311,11 +311,11 @@ jobs:
         working-directory: ./build
         run: ctest -j 2 -C ${{ matrix.config.config }}
       - name: Archive production artifacts
-          uses: actions/upload-artifact@v3
-          with:
-            name: dist
-            path: |
-              build/*
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: |
+            build/*
 
   # AutoMakeBuild:
   #   name: AutoMake/${{ matrix.config.name }}
