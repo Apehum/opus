@@ -125,60 +125,70 @@ jobs:
         config:
           - {
             name: "Android/Dll/ARMv8/Release",
+            artifact: "Android-ARMv8",
             os: ubuntu-latest,
             config: Release,
             args: "-DCMAKE_TOOLCHAIN_FILE=${ANDROID_HOME}/ndk-bundle/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DBUILD_SHARED_LIBS=ON"
           }
           - {
             name: "Android/Dll/ARMv7/Release",
+            artifact: "Android-ARMv7",
             os: ubuntu-latest,
             config: Release,
             args: "-DCMAKE_TOOLCHAIN_FILE=${ANDROID_HOME}/ndk-bundle/build/cmake/android.toolchain.cmake -DANDROID_ABI=armeabi-v7a -DBUILD_SHARED_LIBS=ON"
           }
           - {
             name: "Android/Dll/X86/Release",
+            artifact: "Android-X86",
             os: ubuntu-latest,
             config: Release,
             args: "-DCMAKE_TOOLCHAIN_FILE=${ANDROID_HOME}/ndk-bundle/build/cmake/android.toolchain.cmake -DANDROID_ABI=x86 -DBUILD_SHARED_LIBS=ON"
           }
           - {
             name: "Android/Dll/X64/Release",
+            artifact: "Android-X64",
             os: ubuntu-latest,
             config: Release,
             args: "-DCMAKE_TOOLCHAIN_FILE=${ANDROID_HOME}/ndk-bundle/build/cmake/android.toolchain.cmake -DANDROID_ABI=x86_64 -DBUILD_SHARED_LIBS=ON"
           }
           - {
             name: "Windows/Dll/X86/Release",
+            artifact: "Windows-X86",
             os: windows-latest,
             config: Release,
             args: -G "Visual Studio 17 2022" -A Win32 -DBUILD_SHARED_LIBS=ON
           }
           - {
             name: "Windows/Dll/X64/Release",
+            artifact: "Windows-X64",
             os: windows-latest,
             config: Release,
             args: -G "Visual Studio 17 2022" -A Win32 -DBUILD_SHARED_LIBS=ON
           }
           - {
             name: "Windows/Dll/ARMv7/Release",
+            artifact: "Windows-ARMv7",
             os: windows-latest,
             config: Release,
             args: -G "Visual Studio 17 2022" -A ARM -DBUILD_SHARED_LIBS=ON
           }
           - {
             name: "Windows/Dll/ARMv8/Release",
+            artifact: "Windows-ARMv8",
             os: windows-latest,
             config: Release,
             args: -G "Visual Studio 17 2022" -A ARM64 -DBUILD_SHARED_LIBS=ON
           }
           - {
             name: "Linux/Dll/X64/Release",
+            artifact: "Linux-X64",
             os: ubuntu-latest,
             config: Release,
             args: -DBUILD_SHARED_LIBS=ON
           }
           - {
             name: "MacOSX/Dll/X64/Release",
+            artifact: "MacOSX-X64",
             os: macos-latest,
             config: Release,
             args: -DBUILD_SHARED_LIBS=ON
@@ -192,6 +202,7 @@ jobs:
           # use unix makefiles for iOS to avoid Xcode to complain about signing.
           - {
             name: "iOS/Dll/arm64/Release",
+            artifact: "iOS-arm64",
             os: macos-latest,
             config: Release,
             args: -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_ARCHITECTURES=arm64
@@ -313,7 +324,7 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.config.name }}
+          name: ${{ matrix.config.artifact }}
           path: |
             build/*
 
