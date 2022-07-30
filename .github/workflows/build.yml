@@ -284,7 +284,7 @@ jobs:
           sudo ./cmakeinstall.sh --prefix=/usr/local --exclude-subdir
           rm cmakeinstall.sh
       - name: Create Work Dir
-        run: mkdir build
+        run: rm -r build && mkdir build
       - name: Configure
         working-directory: ./build
         run: cmake .. ${{ matrix.config.args }} -DCMAKE_BUILD_TYPE=${{ matrix.config.config }} -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON
@@ -313,7 +313,7 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: dist
+          name: matrix.config.name
           path: |
             build/*
 
